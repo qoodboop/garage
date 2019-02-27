@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Voitures list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Decapotable</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voiture in voitures %}
+            <tr>
+                <td><a href="{{ path('voiture_show', { 'id': voiture.id }) }}">{{ voiture.id }}</a></td>
+                <td>{% if voiture.decapotable %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('voiture_show', { 'id': voiture.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('voiture_edit', { 'id': voiture.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('voiture_new') }}">Create a new voiture</a>
+        </li>
+    </ul>
+{% endblock %}

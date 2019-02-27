@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="vehicule")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VehiculeRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="Type", type="string")
+ * @ORM\DiscriminatorMap({"vehicule"="Vehicule", "camion"="Camion", "voiture"="Voiture"})
  */
 class Vehicule
 {
@@ -20,7 +23,7 @@ class Vehicule
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -40,33 +43,6 @@ class Vehicule
      */
     private $marque;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=30)
-     */
-    private $type;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="NBroues", type="integer", nullable=true)
-     */
-    private $nBroues;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Poid", type="integer", nullable=true)
-     */
-    private $poid;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Decapotable", type="integer", nullable=true)
-     */
-    private $decapotable;
 
 
     /**
@@ -127,100 +103,44 @@ class Vehicule
         return $this->marque;
     }
 
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Vehicule
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
+    public function getType() {
+    return (new \ReflectionClass($this))->getShortName();
     }
 
-    /**
-     * Get type
+     /**
+     * @var bool
      *
-     * @return string
+     * @ORM\Column(name="Decapotable", type="boolean")
      */
-    public function getType()
+    private $decapotable;
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="NbRoues", type="integer")
+     */
+    private $nbRoues;
+      /**
+     * @var float
+     *
+     * @ORM\Column(name="Poid", type="float")
+     */
+    private $poid;
+
+    public function getDecapotable()
     {
-        return $this->type;
+        return $this->decapotable;
     }
-
-    /**
-     * Set nBroues
-     *
-     * @param integer $nBroues
-     *
-     * @return Vehicule
-     */
-    public function setNBroues($nBroues)
+     public function getNbRoues()
     {
-        $this->nBroues = $nBroues;
-
-        return $this;
+        return $this->nbRoues;
     }
-
-    /**
-     * Get nBroues
-     *
-     * @return int
-     */
-    public function getNBroues()
-    {
-        return $this->nBroues;
-    }
-
-    /**
-     * Set poid
-     *
-     * @param integer $poid
-     *
-     * @return Vehicule
-     */
-    public function setPoid($poid)
-    {
-        $this->poid = $poid;
-
-        return $this;
-    }
-
-    /**
-     * Get poid
-     *
-     * @return int
-     */
     public function getPoid()
     {
         return $this->poid;
     }
 
-    /**
-     * Set decapotable
-     *
-     * @param integer $decapotable
-     *
-     * @return Vehicule
-     */
-    public function setDecapotable($decapotable)
-    {
-        $this->decapotable = $decapotable;
-
-        return $this;
-    }
-
-    /**
-     * Get decapotable
-     *
-     * @return int
-     */
-    public function getDecapotable()
-    {
-        return $this->decapotable;
-    }
 }
+
+
+
 

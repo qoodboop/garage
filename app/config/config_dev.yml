@@ -4,7 +4,8 @@ imports:
 framework:
     router:
         resource: '%kernel.project_dir%/app/config/routing_dev.yml'
-        strict_requirements: true
+        strict_requirements: null 
+        #strict requirements a rue fais des erreurs relative a un id null 
     profiler: { only_exceptions: false }
 
 web_profiler:

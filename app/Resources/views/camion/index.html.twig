@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Camions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nbroues</th>
+                <th>Poid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for camion in camions %}
+            <tr>
+                <td><a href="{{ path('camion_show', { 'id': camion.id }) }}">{{ camion.id }}</a></td>
+                <td>{{ camion.nbRoues }}</td>
+                <td>{{ camion.poid }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('camion_show', { 'id': camion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('camion_edit', { 'id': camion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('camion_new') }}">Create a new camion</a>
+        </li>
+    </ul>
+{% endblock %}

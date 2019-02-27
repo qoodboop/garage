@@ -6,21 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VehiculeType extends AbstractType
+class CamionType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('couleur')->add('Type')->add('nbRoues')->add('poid')->add('decapotable')->add('marque');
+        $builder->add('nbRoues')->add('poid')->add('couleur')->add('marque');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Vehicule'
+            'data_class' => 'AppBundle\Entity\Camion'
         ));
     }
 
@@ -29,7 +29,7 @@ class VehiculeType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_vehicule';
+        return 'appbundle_camion';
     }
 
 
